@@ -1,5 +1,5 @@
 # Dossier des providers et plugins Terraform (généré par terraform init)
-terraform/
+.terraform/
 
 # Fichiers d'état Terraform (contiennent des données sensibles)
 *.tfstate
