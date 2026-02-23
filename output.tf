@@ -12,3 +12,8 @@ output "subnet_id" {
   description = "L'ID du subnet"
   value       = azurerm_subnet.tp_subnet.id
 }
+
+output "load_balancer_public_ip" {
+  description = "L'IP publique pour accéder aux serveurs Nginx"
+  value       = azurerm_public_ip.lb_pip.ip_address
+}

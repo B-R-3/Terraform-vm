@@ -1,7 +1,7 @@
 variable "location" {
   type        = string
   description = "Région Azure où déployer les ressources"
-  default     = "eastus"
+  default     = "francecentral"
 }
 
 variable "prefix" {
