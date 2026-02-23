@@ -1,6 +1,57 @@
-# Commandes Terraform essentielles
+# Déploiement de VMs Azure avec Terraform
 
 ---
+
+## Mise en place du projet
+
+### 1. Création du dépôt GitHub
+
+La première étape a été de créer un dépôt GitHub pour versionner le projet Terraform. Cela permet de suivre l'évolution du code et de conserver un historique des modifications tout au long du TP.
+
+### 2. Création de l'arborescence
+
+Une fois le dépôt cloné en local, j'ai créé les fichiers en respectant la **convention de nommage standard Terraform** :
+
+```
+terraform-vm/
+├── main.tf           # Ressources principales (VMs, réseau, NICs...)
+├── providers.tf      # Configuration du provider AzureRM
+├── variables.tf      # Déclaration des variables
+├── terraform.tfvars  # Valeurs des variables (non commité)
+├── output.tf         # Outputs (IPs, noms des VMs...)
+└── .gitignore        # Fichiers à exclure de Git
+```
+
+### 3. Vérification de l'authentification Azure
+
+Avant de lancer Terraform, j'ai vérifié que le compte Azure était bien connecté via Azure CLI avec la commande :
+
+```bash
+az account show
+```
+
+Cette commande retourne les informations du compte Azure actif (nom, ID de souscription, tenant...). Elle confirme que Terraform pourra s'authentifier automatiquement via Azure CLI.
+---
+
+### 4. Initialisation de Terraform
+
+Une fois les fichiers en place, j'ai initialisé le projet Terraform. Cette commande télécharge les providers nécessaires (ici `azurerm`) et prépare le dossier de travail.
+
+```bash
+terraform init
+```
+
+![terraform init](images/terraform-init.png)
+
+---
+
+### 5. Développement itératif
+
+J'ai ensuite modifié les fichiers `.tf` au fur et à mesure de l'avancement du TP : ajout des ressources réseau, configuration des VMs, gestion des variables, correction des erreurs... jusqu'à obtenir un code fonctionnel prêt à être déployé.
+
+---
+
+## Commandes Terraform essentielles
 
 ## 1. `terraform plan`
 
