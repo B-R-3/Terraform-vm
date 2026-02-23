@@ -1,1 +1,15 @@
-providers.tf
+# Dossier des providers et plugins Terraform (généré par terraform init)
+terraform/
+
+# Fichiers d'état Terraform (contiennent des données sensibles)
+*.tfstate
+*.tfstate.backup
+.terraform.tfstate.lock.info
+
+# Fichiers de variables sensibles
+terraform.tfvars
+*.auto.tfvars
+
+# Fichiers de plan binaire
+*.tfplan
+.env
