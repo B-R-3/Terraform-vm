@@ -86,3 +86,61 @@ terraform destroy -auto-approve
 | `terraform apply` | Applique les changements et déploie l'infrastructure |
 | `curl http://<ip>` | Vérifie qu'un service est accessible après déploiement |
 | `terraform destroy` | Supprime toutes les ressources créées par Terraform |
+
+---
+
+## Difficultés rencontrées
+
+### Doublon de `required_providers`
+
+Lors du `terraform init`, l'erreur suivante est apparue :
+
+```
+Error: Duplicate required providers configuration
+A module may have only one required providers configuration.
+The required providers were previously configured at providers.tf:2,3-21.
+```
+
+**Cause** : le bloc `required_providers` était déclaré dans deux fichiers différents (`providers.tf` et `versions.tf`). Terraform fusionne tous les fichiers `.tf` d'un même dossier, ce qui créait un conflit.
+
+**Solution** : supprimer le bloc `terraform {}` en double et ne le conserver que dans un seul fichier, ici `providers.tf`.
+
+```hcl
+# providers.tf - un seul bloc terraform autorisé
+terraform {
+  required_version = ">= 1.5.0"
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 4.28.0"
+    }
+  }
+}
+```
+
+![doublon provider](images/doublon-provider.png)
+
+---
+
+### Mauvaise région Azure : `eastus` → `francecentral`
+
+**Cause** : la variable `location` était initialement définie sur `"eastus"`, une région américaine, ce qui pouvait poser des problèmes de disponibilité ou de conformité selon le contexte.
+
+**Solution** : modifier la valeur dans `variables.tf` ou `terraform.tfvars` pour utiliser la région française :
+
+```hcl
+# variables.tf
+variable "location" {
+  type        = string
+  description = "Région Azure où déployer les ressources"
+  default     = "francecentral"
+}
+```
+
+Ou directement dans `terraform.tfvars` :
+
+```hcl
+location = "francecentral"
+```
+
+![region francecentral](images/region-francecentral.png)
