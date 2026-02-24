@@ -29,8 +29,15 @@ Avant de lancer Terraform, j'ai vérifié que le compte Azure était bien connec
 ```bash
 az account show
 ```
+### 4. faire le git clone du repo sur le client CLOUD SHELL (azure cli)
 
-Cette commande retourne les informations du compte Azure actif (nom, ID de souscription, tenant...). Elle confirme que Terraform pourra s'authentifier automatiquement via Azure CLI.
+Une fois le dépôt cloné en local, j'ai créé les fichiers en respectant la **convention de nommage standard Terraform** :
+
+```bash
+https://github.com/B-R-3/Terraform-vm.git
+```
+
+### Cette commande ajoute le projet distant dans notre espace cloud d'azure 
 ---
 
 ### 4. Initialisation de Terraform
